@@ -67,8 +67,6 @@ clearAll = async () => {
   } catch (e) {
     // clear error
   }
-
-  console.log('Done.');
 };
 
 export default function Clients({ navigation, route }) {
@@ -77,8 +75,6 @@ export default function Clients({ navigation, route }) {
   const [filterClients, setFilteredClients] = useState(clients);
 
   const [newClients, setNewClients] = useState(defaultClients);
-  const [searchClient, setSearchClient] = useState(clients);
-  /* РАБОТАЕТ ПОИСК, НО НЕ ОТОБРАЖАЮТСЯ НОВЫЕ КЛИЕНТЫ */
 
   const loadClients = async () => {
     const storedClients = await getData();
@@ -96,11 +92,9 @@ export default function Clients({ navigation, route }) {
       setClients(newClients);
       storeData(newClients);
       navigation.setParams({});
-      //setFilteredClients([...clients, route.params]);
     }
   }, [route.params?.name, navigation]);
 
-  // надо передавать копию массива [...clients]
   useEffect(() => {
     if (filter) {
       setFilteredClients(
